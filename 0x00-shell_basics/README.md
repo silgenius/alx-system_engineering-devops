@@ -1,2 +1,1 @@
-#!/bin/bash
-# alx-system_engineering-devops
+pwd 0x00-shell_basics
