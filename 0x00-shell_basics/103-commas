@@ -1,0 +1,3 @@
+#!/bin/bash
+ls -Ap | sort -d | tr '\n' ',' && echo
+
