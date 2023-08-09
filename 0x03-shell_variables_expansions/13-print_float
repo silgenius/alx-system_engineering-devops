@@ -1,2 +1,2 @@
 #!/bin/bash
-print "%f\n" $NUM
+print "%f.2\n" $NUM
