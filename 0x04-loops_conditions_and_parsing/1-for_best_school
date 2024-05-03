@@ -2,7 +2,7 @@
 # This script displays "Best School" 10 times
 
 i=1
-((i = 1; i <= 10; i++));
+((i = 1; i <= 10; i++)); do
 	echo "Best School"
 
 done
