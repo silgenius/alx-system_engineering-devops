@@ -4,4 +4,5 @@
 pid=$(pidof 4-to_infinity_and_beyond)
 if [ -n "$pid" ]; then
 	kill -s SIGINT "$pid"
+	echo "Terminated"
 fi
