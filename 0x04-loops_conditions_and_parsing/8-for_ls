@@ -5,6 +5,6 @@
 
 filename=""
 for file in *; do
-	filename="${file#*-}"
+	filename="${file#*-}" # Extracts the part of the filename before the first '-'
 	echo "$filename"
 done
