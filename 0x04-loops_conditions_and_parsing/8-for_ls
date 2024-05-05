@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# A Bash script that displays:
-# The content of the current directory in a list format
-# Where only the part of the name after the first dash is displayed
-
-filename=""
-ls -I ".list" > .list
-for file in $(cat .list); do
-	filename="${file#*-}"
-	echo "$filename"
+# Loop through files in the current directory
+for file in *; do
+    # Check if the file is not hidden
+    if [[ ${file:0:1} != '.' ]]; then
+        # Extract the part of the name after the first dash
+        name=$(echo "$file" | cut -d '-' -f 2-)
+        # Print the modified name
+        echo "$name"
+    fi
 done
-rm .list
+
