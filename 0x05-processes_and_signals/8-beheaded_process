@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# A Bash script that stops 4-to_infinity_and_beyond process.
+
+pgrep -a bash | awk '$3=="./7-highlander" {print $1}' | xargs -r kill -9
