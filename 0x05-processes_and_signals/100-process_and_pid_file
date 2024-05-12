@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # A Bash script that:
 # Creates the file /var/run/myscript.pid containing its PID
 # Displays To infinity and beyond indefinitely
@@ -8,10 +8,11 @@
 
 echo $$ > /var/run/myscript.pid
 
-trap 'echo "I hate the kill command" && rm /var/run/myscript.pid && exit 0' SIGTERM
-trap 'echo "Y U no love me?!" && rm /var/run/myscript.pid && exit 0' SIGINT
-trap 'rm /var/run/myscript.pid && exit 0' SIGQUIT
+trap 'echo "I hate the kill command" && rm /var/run/myscript.pid && exit' SIGTERM
+trap 'echo "Y U no love me?!" && rm /var/run/myscript.pid && exit' SIGINT
+trap 'rm /var/run/myscript.pid && exit' SIGQUIT
 
 while true; do
 	echo "To infinity and beyond"
+	sleep 2
 done
