@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-
-echo $$
-trap 'echo "done"' SIGINT
-while ((1)); do
-	echo "free"
-	sleep 3
-done
