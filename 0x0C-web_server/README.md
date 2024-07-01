@@ -51,4 +51,19 @@ Here are some examples of how to use the scripts:
 - Transfer a file to a remote server:
   ```bash
   bash 0-transfer_file
+  ```
+
+- Install Nginx on a server and configure a basic server block:
+  ```bash
+  bash 1-install_nginx_web_server
+  ```
+
+- Apply Puppet manifest to install and configure Nginx:
+  ```bash
+  sudo puppet apply 7-puppet_install_nginx_web_server.pp
+  ```
+
+## Author
+
+- [Martin Olutade](https://github.com/silgenius)
 
