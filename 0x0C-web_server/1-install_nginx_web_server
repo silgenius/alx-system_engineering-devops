@@ -2,7 +2,9 @@
 # a Bash script that configures a new Ubuntu machine to respect above requirements
 # (this script will be run on the server itself)
 
-apt-get update
-apt-get install nginx -y
-ufw allow 'Nginx HTTP'
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo apt-get update
+sudo apt-get install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo ufw allow 'Nginx HTTP'
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
