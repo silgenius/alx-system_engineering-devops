@@ -2,6 +2,8 @@
 # script that Configure your Nginx server so that /redirect_me
 # is redirecting to another page
 
+sudo apt-get update
+sudo apt-get install nginx -y
 content="server_name _;\n\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n"
 sudo sed -i "s|server_name _;|${content}|g" /etc/nginx/sites-available/default
 sudo service nginx reload
