@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Fix curl: (52) Empty reply from server error
 
-sudo service apache2 start
+service apache2 start
