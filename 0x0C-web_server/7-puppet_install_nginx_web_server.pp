@@ -25,7 +25,7 @@ package {'nginx':
 }
 
 file {'/var/www/html/index.nginx-debian.html':
-  ensure  => 'file'
+  ensure  => 'file',
   content => 'Hello World!',
 }
 
