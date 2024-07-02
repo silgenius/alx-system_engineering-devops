@@ -2,3 +2,4 @@
 # Fix curl: (52) Empty reply from server error
 
 echo "Hello Holberton" > /var/www/html/index.html
+sudo service apache2 restart
