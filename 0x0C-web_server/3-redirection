@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# script that Configure your Nginx server so that /redirect_me
-# is redirecting to another page
+# a script that install nginx and make some configuration
 
 sudo apt-get update
 sudo apt-get install nginx -y
