@@ -27,7 +27,7 @@ printf %s "server {
 }" > /etc/nginx/sites-available/default
 
 # Configure header
-content="http {\n\n\tadd_header X-Served-By \"web-02\"";
+content="http {\n\n\tadd_header X-Served-By \"$(hostname)\"";
 sudo sed -i "s|http {|${content}|g" /etc/nginx/nginx.conf
 
 sudo service nginx start
