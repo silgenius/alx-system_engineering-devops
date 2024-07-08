@@ -4,7 +4,8 @@
 sudo apt-get update
 sudo apt-get install haproxy -y
 
-printf %s "backend web-backend
+printf %s "
+backend web-backend
         balance roundrobin
         server web-01 54.88.64.221:80 check
         server web-02 54.87.212.173:80 check
