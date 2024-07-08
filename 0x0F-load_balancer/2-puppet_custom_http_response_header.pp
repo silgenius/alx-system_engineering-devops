@@ -38,8 +38,8 @@ file {'/etc/nginx/sites-available/default':
 
 file_line {'Include header':
   ensure => '/etc/nginx/nginx.conf',
-  line   => $config_header
-  match  => 'http {'
+  line   => $config_header,
+  match  => 'http {',
 }
 
 service {'nginx':
