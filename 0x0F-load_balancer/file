@@ -1,0 +1,48 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+        worker_connections 768;
+        # multi_accept on;
+}
+
+http {
+
+	add_header X-Served-By "4c26ebe2058f"
+
+	add_header X-Served-By "web-02"
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        # server_tokens off;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+backend web-backend
+        balance roundrobin
+        server web-01 54.88.64.221:80 check
+        server web-02 54.87.212.173:80 check
+
+frontend web-frontend
+        bind *:80
+        default_backend web-backend
+backend web-backend
+        balance roundrobin
+        server web-01 54.88.64.221:80 check
+        server web-02 54.87.212.173:80 check
+
+frontend web-frontend
+        bind *:80
+        default_backend web-backend
