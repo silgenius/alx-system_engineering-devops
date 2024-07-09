@@ -36,7 +36,7 @@ package {'nginx':
 
 file {'/var/www/html/index.nginx-debian.html':
   ensure  => 'file',
-  content => "Hello World!\n",
+  content => "Hello World!",
 }
 
 file {'/etc/nginx/sites-available/default':
@@ -52,7 +52,7 @@ file_line {'Include header':
 
 file { '/var/www/html/404.html':
   ensure  => present,
-  content => "Ceci n'est pas une page\n",
+  content => "Ceci n'est pas une page",
 }
 
 service {'nginx':
