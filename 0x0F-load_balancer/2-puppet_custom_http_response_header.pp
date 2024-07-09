@@ -24,7 +24,7 @@ $server_config = "server {
 }
 "
 
-exec { 'update server':
+exec { 'apt_update':
 command => '/usr/bin/sudo /usr/bin/apt-get update'
 }
 
