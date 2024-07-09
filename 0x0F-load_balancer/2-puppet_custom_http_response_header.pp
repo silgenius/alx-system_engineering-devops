@@ -13,6 +13,13 @@ $file_content="server {
  \tlocation /redirect_me {
  \t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 \t}
+
+\terror_page 404 /404.html;
+\tlocation = /404.html {
+\t\troot /var/www/html;
+\t\tinternal;
+\t}
+
 }"
 
 $host = $::hostname
@@ -41,6 +48,11 @@ file_line {'Include header':
   path => '/etc/nginx/nginx.conf',
   line   => $config_header,
   match  => 'http {',
+}
+
+file { '/var/www/html/404.html':
+  ensure  => present,
+  content => "Ceci n'est pas une page\n",
 }
 
 service {'nginx':
