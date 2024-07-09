@@ -1,54 +1,54 @@
-# configuring your server with Puppet
+# Installs nginx on a server
+$server_config = "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-$file_content="server {
-\tlisten 80 default_server;
-\tlisten [::]:80 default_server;
-\troot /var/www/html;
+    root /var/www/html;
 
-\t# Add index.php to the list if you are using PHP
-\tindex index.html index.htm index.nginx-debian.html;
+    index index.html index.htm index.nginx-debian.html;
 
-\tserver_name _;
+    server_name _;
 
-\tadd_header X-Served-By \"${hostname}\";
+    add_header X-Served-By \"${hostname}\";
 
- \tlocation /redirect_me {
- \t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-\t}
+    location /redirect_me {
+        return 301 https://www.goal.com;
+    }
 
-\terror_page 404 /404.html;
-\tlocation = /404.html {
-\t\troot /var/www/html;
-\t\tinternal;
-\t}
-
-}"
-
-exec {'apt_update':
-  command => 'apt-get update',
-  path    => ['usr/bin', 'usr/sbin'],
+    error_page 404 /404.html;
+    location = /404.html {
+                root /var/www/html;
+                internal;
+    }
+}
+"
+exec { 'update server':
+command => '/usr/bin/sudo /usr/bin/apt-get update'
 }
 
-package {'nginx':
-  ensure => 'installed',
+package { 'nginx':
+ensure  => installed,
+require => Exec['update server']
 }
 
-file {'/var/www/html/index.nginx-debian.html':
-  ensure  => 'file',
-  content => "Hello World!",
+file { '/etc/nginx/sites-available/default':
+ensure  => file,
+content => $server_config,
+require => Package['nginx'],
+notify  => Exec['restart Nginx']
 }
 
-file {'/etc/nginx/sites-available/default':
-  ensure  => 'file',
-  content => $file_content,
+exec { 'restart Nginx':
+  provider => shell,
+  command  => 'sudo service nginx restart',
+}
+
+file { '/var/www/html/index.nginx-debian.html':
+ensure  => present,
+content => 'Hello World!'
 }
 
 file { '/var/www/html/404.html':
-  ensure  => present,
-  content => "Ceci n'est pas une page",
-}
-
-service {'nginx':
-  ensure => 'running',
-  enable => true,
+ensure  => present,
+content => "Ceci n'est pas une page"
 }
