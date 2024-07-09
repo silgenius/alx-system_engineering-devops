@@ -15,7 +15,8 @@ $file_content="server {
 \t}
 }"
 
-$config _header = "http {\n\n\tadd_header X-Served-By \"$(hostname)\";"
+$host = $::hostname
+$config_header="http {\n\n\tadd_header X-Served-By \"${host}\";"
 
 exec {'apt_update':
   command => 'apt-get update',
