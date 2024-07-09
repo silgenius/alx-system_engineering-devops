@@ -1,4 +1,5 @@
-# Installs nginx on a server
+# configuring your server with Puppet
+
 $server_config = "server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -22,13 +23,14 @@ $server_config = "server {
     }
 }
 "
-exec { 'update server':
-command => '/usr/bin/sudo /usr/bin/apt-get update'
+
+exec {'apt_update':
+  command => 'apt-get update',
+  path    => ['usr/bin', 'usr/sbin'],
 }
 
 package { 'nginx':
 ensure  => installed,
-require => Exec['update server']
 }
 
 file { '/etc/nginx/sites-available/default':
