@@ -10,6 +10,8 @@ $file_content="server {
 
 \tserver_name _;
 
+\tadd_header X-Served-By \"${hostname}\";
+
  \tlocation /redirect_me {
  \t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
 \t}
@@ -21,9 +23,6 @@ $file_content="server {
 \t}
 
 }"
-
-$host = $::hostname
-$config_header="http {\n\n\tadd_header X-Served-By \"${host}\";"
 
 exec {'apt_update':
   command => 'apt-get update',
@@ -42,12 +41,6 @@ file {'/var/www/html/index.nginx-debian.html':
 file {'/etc/nginx/sites-available/default':
   ensure  => 'file',
   content => $file_content,
-}
-
-file_line {'Include header':
-  path => '/etc/nginx/nginx.conf',
-  line   => $config_header,
-  match  => 'http {',
 }
 
 file { '/var/www/html/404.html':
