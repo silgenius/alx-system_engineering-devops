@@ -31,7 +31,7 @@ exec {'apt_update':
 
 package { 'nginx':
 ensure  => installed,
-require => Exec['update server']
+require => Exec['apt_update']
 }
 
 file { '/etc/nginx/sites-available/default':
