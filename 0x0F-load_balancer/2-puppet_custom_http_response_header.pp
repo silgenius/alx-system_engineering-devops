@@ -1,56 +1,61 @@
 # configuring your server with Puppet
 
-$server_config = "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+$file_content="server {
+\tlisten 80 default_server;
+\tlisten [::]:80 default_server;
+\troot /var/www/html;
 
-    root /var/www/html;
+\t# Add index.php to the list if you are using PHP
+\tindex index.html index.htm index.nginx-debian.html;
 
-    index index.html index.htm index.nginx-debian.html;
+\tserver_name _;
 
-    server_name _;
+ \tlocation /redirect_me {
+ \t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+\t}
 
-    add_header X-Served-By \"${hostname}\";
+\terror_page 404 /404.html;
+\tlocation = /404.html {
+\t\troot /var/www/html;
+\t\tinternal;
+\t}
 
-    location /redirect_me {
-        return 301 https://www.goal.com;
-    }
+}"
 
-    error_page 404 /404.html;
-    location = /404.html {
-                root /var/www/html;
-                internal;
-    }
-}
-"
+
+$host = $::hostname
+$config_header="http {\n\n\tadd_header X-Served-By \"${host}\";"
 
 exec { 'apt_update':
 command => '/usr/bin/sudo /usr/bin/apt-get update'
 }
 
-package { 'nginx':
-ensure  => installed,
-require => Exec['apt_update']
+package {'nginx':
+  ensure => 'installed',
 }
 
-file { '/etc/nginx/sites-available/default':
-ensure  => file,
-content => $server_config,
-require => Package['nginx'],
-notify  => Exec['restart Nginx']
+file {'/var/www/html/index.nginx-debian.html':
+  ensure  => 'file',
+  content => "Hello World!\n",
 }
 
-exec { 'restart Nginx':
-  provider => shell,
-  command  => 'sudo service nginx restart',
+file {'/etc/nginx/sites-available/default':
+  ensure  => 'file',
+  content => $file_content,
 }
 
-file { '/var/www/html/index.nginx-debian.html':
-ensure  => present,
-content => 'Hello World!'
+file_line {'Include header':
+  path => '/etc/nginx/nginx.conf',
+  line   => $config_header,
+  match  => 'http {',
 }
 
 file { '/var/www/html/404.html':
-ensure  => present,
-content => "Ceci n'est pas une page"
+  ensure  => present,
+  content => "Ceci n'est pas une page\n",
+}
+
+service {'nginx':
+  ensure => 'running',
+  enable => true,
 }
