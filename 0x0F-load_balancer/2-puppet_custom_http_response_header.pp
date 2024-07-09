@@ -24,9 +24,8 @@ $server_config = "server {
 }
 "
 
-exec {'apt_update':
-  command => 'apt-get update',
-  path    => ['usr/bin', 'usr/sbin'],
+exec { 'update server':
+command => '/usr/bin/sudo /usr/bin/apt-get update'
 }
 
 package { 'nginx':
