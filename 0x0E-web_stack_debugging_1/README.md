@@ -27,7 +27,7 @@ To use the provided script, follow these steps:
 4. Execute the script using bash:
    ```bash
    bash 0-nginx_likes_port_80
-  ```
+   ```
 
 5. Configure a server to ensure Nginx is listening on port 80:
   ```bash
