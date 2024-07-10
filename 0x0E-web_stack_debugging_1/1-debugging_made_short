@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# a Bash script that configures a server
+sudo apt install nginx -y
+sudo service nginx start
+sudo sed -i 's/status_of_proc -p $PID/status_of_proc -p -12/g' /etc/init.d/nginx
