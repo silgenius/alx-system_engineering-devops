@@ -1,0 +1,10 @@
+backend web-backend
+        balance roundrobin
+        server web-01 54.88.64.221:80 check
+        server web-02 54.87.212.173:80 check
+
+frontend web-frontend
+        bind *:80
+        bind *:443 ssl crt /etc/letsencrypt/live/www.techerudites.tech/pemfile.pem
+        redirect scheme https code 301 if !{ ssl_fc }
+        default_backend web-backend
