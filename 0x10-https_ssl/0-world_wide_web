@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# a Bash script that will display information about subdomains.
+
+function digup {
+	domain=$1.$2.
+	dns_record=$(dig "$domain" | awk "/^${domain}/ { print $3 }")
+	record_type=$(echo $dns_record | awk '{print $4}')
+	ip_address=$(echo $dns_record | awk '{print $5}')
+	echo "The subdomain $1 is a $record_type record and points to $ip_address"
+}
+
+count=$(echo $* | wc -w)
+if ((count < 2)); then
+	subdomains=("www" "lb-01" "web-01" "web-02")
+else
+	subdomains=($2)
+fi
+
+for subdomain in "${subdomains[@]}"; do
+	digup "$subdomain" "$1"
+done
