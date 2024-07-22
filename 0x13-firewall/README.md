@@ -29,7 +29,7 @@ To use the provided scripts, follow these steps:
    ```bash
    bash script_name
    ```
-        - Replace `script_name` with the actual name of the script you want to run.
+- Replace `script_name` with the actual name of the script you want to run.
 
 ### Examples
 
@@ -43,6 +43,6 @@ To use the provided scripts, follow these steps:
 	./100-port_forwarding
 	```
 
-### Author
+## Author
 
 - [Martin Olutade](https://github.com/silgenius)
