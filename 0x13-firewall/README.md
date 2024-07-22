@@ -45,4 +45,4 @@ To use the provided scripts, follow these steps:
 
 ### Author
 
-- [Martin Olutade](https://github.com/silgenius)`
+- [Martin Olutade](https://github.com/silgenius)
