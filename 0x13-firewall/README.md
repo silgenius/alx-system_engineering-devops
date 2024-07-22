@@ -35,7 +35,7 @@ To use the provided scripts, follow these steps:
 
 - Block all incoming traffic except for SSH (port 22) and HTTP (port 80) and HTTPS (port 443):
 	```txt
-        bash 0-block_all_incoming_traffic_but
+        0-block_all_incoming_traffic_but
 	```
 
 - Set up port forwarding from port 8080 to port 80:
