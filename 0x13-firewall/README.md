@@ -34,13 +34,13 @@ To use the provided scripts, follow these steps:
 ### Examples
 
 - Block all incoming traffic except for SSH (port 22) and HTTP (port 80) and HTTPS (port 443):
-        ```bash
+	```txt
         bash 0-block_all_incoming_traffic_but
-        ```
+	```
 
 - Set up port forwarding from port 8080 to port 80:
-        ```bash
-	bash 100-port_forwarding
+	```txt
+	100-port_forwarding
 	```
 
 ## Author
