@@ -1,22 +1,15 @@
 #!/usr/bin/env bash
 # a Bash script that configures the container to fit the above requirements
 
-sudo service nginx stop
-
-# change /etc/nginx to nginx user
-chown -R nginx:nginx /etc/nginx
-
-# enable read mode for nginx.conf
-chmod +r /etc/nginx/nginx.conf
-
-# nginx must be running as nginx user
-sudo sh -c "sed -i 's/#user www-data;/user nginx;/g' /etc/nginx/nginx.conf"
+sudo sed -i 's/user www-data/user nginx/g' /etc/nginx/nginx.conf
 
 # nginx listening on all active IPs on port 8080
-sudo sh -c "sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' /etc/nginx/sites-enabled/default"
-sudo sh -c "sed -i 's/listen [::]:80 default_server ipv6only=on;/listen [::]:8080 default_server ipv6only=on;/g' /etc/nginx/sites-enabled/default"
+sudo sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+
+# enable read mode for nginx user
+sudo chmod 644 /etc/nginx/nginx.conf
 
 # Get pid of process running in port 8080 and kill it
-pidof apache2 | xargs sudo kill
+pkill apache2
 
-sudo -u nginx service nginx start
+sudo -u nginx service nginx restart
