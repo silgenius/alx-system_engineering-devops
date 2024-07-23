@@ -17,7 +17,6 @@ sudo sh -c "sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' /
 sudo sh -c "sed -i 's/listen [::]:80 default_server/listen [::]:8080 default_server/g' /etc/nginx/sites-enabled/default"
 
 # Get pid of process running in port 8080 and kill it
-pid=$(pidof apache2)
-kill "$pid"
+pidof apache2 | xargs sudo kill
 
 sudo -u nginx service nginx start
