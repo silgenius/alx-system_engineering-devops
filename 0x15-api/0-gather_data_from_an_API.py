@@ -33,7 +33,7 @@ def main():
         total_task += 1
 
     print(f'Employee {employee_name} is done with \
- tasks({task_completed}/{total_task}):')
+tasks({task_completed}/{total_task}):')
 
     print(f'{task_title}', end="")
 
