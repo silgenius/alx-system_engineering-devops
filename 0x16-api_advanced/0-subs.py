@@ -19,9 +19,9 @@ def number_of_subscribers(subreddit):
         return 0
 
     data = response.get("data")
-    if data == None:
+    if data is None:
         return 0
     subscribers = data.get("subscribers")
-    if subscribers == None:
+    if subscribers is None:
         return 0
     return subscribers
