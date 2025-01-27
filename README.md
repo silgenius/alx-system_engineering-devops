@@ -30,3 +30,6 @@ In this section, you'll learn how to navigate the file system using shell comman
 
 A brief overview of shell basics, including environment variables, shell options, and basic scripting concepts.
 
+## Author
+
+- [Martin Olutade](https://github.com/silgenius/)
